@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "PMRS -> Excel v1.0",
+  "version": "1.0",
+  "description": "Export the PMRS table you are viewing (this page only or every page) to an Excel .xlsx file saved in Downloads/Report_download.",
+  "minimum_chrome_version": "102",
+  "permissions": ["activeTab", "storage", "downloads", "scripting"],
+  "host_permissions": [
+    "https://pmrs.digitalsp.gov.kh/*",
+    "http://localhost:8000/*",
+    "http://127.0.0.1:8000/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "PMRS -> Excel v1.0",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://pmrs.digitalsp.gov.kh/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

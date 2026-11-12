@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PMRS -&gt; Excel v1.0</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M3 9.5h18M9 9.5V20" />
+            </svg>
+          </span>
+          <h1>PMRS -&gt; Excel <span class="ver">v1.0</span></h1>
+        </div>
+        <button id="minimize" class="icon-btn" type="button" title="Minimize"
+                aria-label="Minimize" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round">
+            <path d="M5 12h14" />
+          </svg>
+        </button>
+      </header>
+
+      <main class="app-body" id="body">
+        <section class="info-box" aria-live="polite">
+          <div class="info-main" id="dims">Checking this page…</div>
+          <div class="info-sub" id="pageInfo">PMRS table export</div>
+        </section>
+
+        <div class="checks">
+          <label class="check">
+            <input type="checkbox" id="includeHeader" checked />
+            <span>Include header row</span>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="allPages" checked />
+            <span>Go through all pages</span>
+          </label>
+          <label class="check" title="Open each patient's View modal and capture diagnoses, vitals and HPI. Slower, but stores a richer JSON payload.">
+            <input type="checkbox" id="deepScrape" checked />
+            <span>Deep scrape detail modals (slower)</span>
+          </label>
+        </div>
+
+        <div class="btn-row btn-row-main">
+          <button id="downloadAll" class="btn btn-primary" type="button">
+            Download all pages
+          </button>
+        </div>
+
+        <p class="sync-title">Save to database</p>
+        <div class="sync-stack">
+          <button id="btn-sync-reject" class="btn btn-outline" type="button"
+                  title="Save rejection rows to npca_validation_logs. With 'Go through all pages' ticked, every page is synced.">
+            Save Rejections to Logs
+          </button>
+          <button id="btn-sync-approve" class="btn btn-gold" type="button"
+                  title="Save approved rows to pmrs_approved_gold. With 'Go through all pages' ticked, every page is synced.">
+            Save Approved (Gold) to DB
+          </button>
+        </div>
+
+        <p id="syncStatus" class="save-note" role="status" aria-live="polite" hidden></p>
+
+        <div class="btn-row">
+          <button id="downloadPage" class="btn btn-outline" type="button">This page only</button>
+          <button id="diagnose" class="btn btn-outline" type="button">Diagnose page</button>
+        </div>
+
+        <pre id="diag" class="diag" hidden></pre>
+
+        <p class="foot" id="status">
+          Ready. Tip: set 'rows per page' to 100 on the site first for fewer requests.
+        </p>
+      </main>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
